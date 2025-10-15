@@ -8,99 +8,166 @@
 <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
 <style>
   body {
+    margin: 0;
     background: linear-gradient(135deg, #FFF8E7, #E3F2FD);
     font-family: 'Poppins', sans-serif;
     overflow: hidden;
   }
   .page {
-    display: none;
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
     opacity: 0;
-    transition: opacity 1.2s ease;
+    transform: rotateY(90deg);
+    transition: opacity 0.8s ease, transform 1s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
   .page.active {
-    display: block;
     opacity: 1;
+    transform: rotateY(0deg);
+    z-index: 10;
   }
-  .fade-in-up {
-    animation: fadeInUp 1s ease forwards;
+  .ranking-card {
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    border-radius: 1.5rem;
+    padding: 2rem;
+    width: 90%;
+    max-width: 800px;
+    transform: perspective(1000px) rotateX(0deg);
   }
-  @keyframes fadeInUp {
-    0% { opacity: 0; transform: translateY(30px); }
-    100% { opacity: 1; transform: translateY(0); }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  th, td {
+    padding: 0.75rem;
+    text-align: center;
+    border-bottom: 1px solid #e5e7eb;
+  }
+  th {
+    background-color: rgba(255, 240, 200, 0.8);
+    font-weight: bold;
+  }
+  tr:nth-child(even) {
+    background-color: rgba(250, 250, 250, 0.7);
+  }
+  .logo {
+    width: 160px;
+    margin-bottom: 1rem;
   }
 </style>
 </head>
-<body class="flex flex-col items-center justify-center h-screen text-gray-800">
+<body class="flex flex-col justify-center items-center h-screen text-gray-800">
 
-  <!-- Header -->
-  <h1 id="headerTitle" class="text-4xl font-bold mb-6 text-center">🏆 公司排行榜展示</h1>
+  <img src="https://i.imgur.com/AbyTxH1.png" class="logo" alt="Company Logo">
 
-  <!-- Pages -->
-  <div id="page1" class="page active text-center">
-    <h2 class="text-3xl mb-4 font-semibold">本月个人贡献排行</h2>
-    <table class="mx-auto bg-white shadow-lg rounded-2xl overflow-hidden text-xl">
-      <tr class="bg-yellow-100"><th>名次</th><th>姓名</th><th>分数</th></tr>
-      <tr><td>🥇 1</td><td>Albert</td><td>1320</td></tr>
-      <tr><td>🥈 2</td><td>Aung Thant</td><td>1180</td></tr>
-      <tr><td>🥉 3</td><td>Mei Ling</td><td>970</td></tr>
-      <tr><td>4</td><td>Jin Wei</td><td>920</td></tr>
-      <tr><td>5</td><td>Siti</td><td>870</td></tr>
-    </table>
+  <!-- 1️⃣ 本月个人贡献排行 -->
+  <div id="page1" class="page active">
+    <div class="ranking-card text-center">
+      <h2 class="text-3xl font-semibold mb-4">🏆 本月个人贡献排行</h2>
+      <table class="text-xl">
+        <tr><th>名次</th><th>姓名</th><th>分数</th></tr>
+        <tr><td>🥇 1</td><td>Albert</td><td>1320</td></tr>
+        <tr><td>🥈 2</td><td>Aung Thant</td><td>1180</td></tr>
+        <tr><td>🥉 3</td><td>Mei Ling</td><td>970</td></tr>
+        <tr><td>4</td><td>Jin Wei</td><td>920</td></tr>
+        <tr><td>5</td><td>Siti</td><td>870</td></tr>
+      </table>
+    </div>
   </div>
 
-  <div id="page2" class="page text-center">
-    <h2 class="text-3xl mb-4 font-semibold">年度团队贡献排行</h2>
-    <table class="mx-auto bg-white shadow-lg rounded-2xl overflow-hidden text-xl">
-      <tr class="bg-blue-100"><th>名次</th><th>团队</th><th>分数</th></tr>
-      <tr><td>🥇 1</td><td>Production</td><td>8200</td></tr>
-      <tr><td>🥈 2</td><td>QA</td><td>7900</td></tr>
-      <tr><td>🥉 3</td><td>Purchasing</td><td>7100</td></tr>
-      <tr><td>4</td><td>Engineering</td><td>6900</td></tr>
-      <tr><td>5</td><td>HR</td><td>6400</td></tr>
-    </table>
+  <!-- 2️⃣ 年度团队贡献排行 -->
+  <div id="page2" class="page">
+    <div class="ranking-card text-center">
+      <h2 class="text-3xl font-semibold mb-4">🌍 年度团队贡献排行</h2>
+      <table class="text-xl">
+        <tr><th>名次</th><th>团队</th><th>分数</th></tr>
+        <tr><td>🥇 1</td><td>Production</td><td>8200</td></tr>
+        <tr><td>🥈 2</td><td>QA</td><td>7900</td></tr>
+        <tr><td>🥉 3</td><td>Purchasing</td><td>7100</td></tr>
+        <tr><td>4</td><td>Engineering</td><td>6900</td></tr>
+        <tr><td>5</td><td>HR</td><td>6400</td></tr>
+      </table>
+    </div>
   </div>
 
-  <div id="page3" class="page text-center">
-    <h2 class="text-3xl mb-4 font-semibold">综合效率排行</h2>
-    <table class="mx-auto bg-white shadow-lg rounded-2xl overflow-hidden text-xl">
-      <tr class="bg-green-100"><th>名次</th><th>姓名</th><th>效率</th></tr>
-      <tr><td>1</td><td>Albert</td><td>93%</td></tr>
-      <tr><td>2</td><td>Aung Thant</td><td>88%</td></tr>
-      <tr><td>3</td><td>Mei Ling</td><td>81%</td></tr>
-      <tr><td>4</td><td>Jin Wei</td><td>79%</td></tr>
-      <tr><td>5</td><td>Siti</td><td>76%</td></tr>
-    </table>
+  <!-- 3️⃣ 综合效率排行 -->
+  <div id="page3" class="page">
+    <div class="ranking-card text-center">
+      <h2 class="text-3xl font-semibold mb-4">⚙️ 综合效率排行</h2>
+      <table class="text-xl">
+        <tr><th>名次</th><th>姓名</th><th>效率</th></tr>
+        <tr><td>1</td><td>Albert</td><td>93%</td></tr>
+        <tr><td>2</td><td>Aung Thant</td><td>88%</td></tr>
+        <tr><td>3</td><td>Mei Ling</td><td>81%</td></tr>
+        <tr><td>4</td><td>Jin Wei</td><td>79%</td></tr>
+        <tr><td>5</td><td>Siti</td><td>76%</td></tr>
+      </table>
+    </div>
   </div>
 
-  <!-- Progress bar -->
-  <div class="w-2/3 bg-gray-300 rounded-full h-3 mt-6 overflow-hidden">
-    <div id="progress" class="bg-gradient-to-r from-yellow-400 to-orange-400 h-3 w-0"></div>
+  <!-- 4️⃣ 新增：部门士气排行榜 -->
+  <div id="page4" class="page">
+    <div class="ranking-card text-center">
+      <h2 class="text-3xl font-semibold mb-4">💖 部门士气排行榜</h2>
+      <table class="text-xl">
+        <tr><th>名次</th><th>部门</th><th>满意度</th></tr>
+        <tr><td>🥇 1</td><td>QA</td><td>98%</td></tr>
+        <tr><td>🥈 2</td><td>Production</td><td>94%</td></tr>
+        <tr><td>🥉 3</td><td>Engineering</td><td>91%</td></tr>
+        <tr><td>4</td><td>Admin</td><td>89%</td></tr>
+        <tr><td>5</td><td>HR</td><td>87%</td></tr>
+      </table>
+    </div>
   </div>
 
 <script>
 let pages = document.querySelectorAll('.page');
-let progress = document.getElementById('progress');
 let current = 0;
-const intervalTime = 10000; // 每页10秒
+let touchStartX = 0;
+let autoFlip;
 
 function showPage(index) {
-  pages.forEach(p => p.classList.remove('active'));
+  pages.forEach((p, i) => p.classList.remove('active'));
   pages[index].classList.add('active');
-  anime({
-    targets: '#progress',
-    width: ['0%', '100%'],
-    duration: intervalTime,
-    easing: 'linear'
-  });
 }
 
-setInterval(() => {
+function nextPage() {
   current = (current + 1) % pages.length;
   showPage(current);
-}, intervalTime);
+}
 
-showPage(0);
+function prevPage() {
+  current = (current - 1 + pages.length) % pages.length;
+  showPage(current);
+}
+
+function startAutoFlip() {
+  autoFlip = setInterval(nextPage, 4000); // 4秒
+}
+
+function stopAutoFlip() {
+  clearInterval(autoFlip);
+}
+
+document.body.addEventListener('touchstart', e => {
+  touchStartX = e.touches[0].clientX;
+});
+
+document.body.addEventListener('touchend', e => {
+  let touchEndX = e.changedTouches[0].clientX;
+  if (touchEndX - touchStartX > 50) prevPage();
+  else if (touchStartX - touchEndX > 50) nextPage();
+});
+
+startAutoFlip();
 </script>
 
 </body>
 </html>
+
